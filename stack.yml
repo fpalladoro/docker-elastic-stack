@@ -1,0 +1,40 @@
+version: "3"
+services:
+
+  elasticsearch:
+    image: elasticsearch
+    ports:
+      - "9200"
+    networks:
+      - elastic
+    environment:
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+
+  kibana:
+    image: kibana
+    networks:
+      - elastic
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:5.2.2
+    ports:
+      - "5043"
+    networks:
+      - elastic
+
+  metricbeat:
+    image: athieriot/metricbeat
+    networks:
+      - elastic
+    volumes:
+      - /proc:/hostfs/proc:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /:/hostfs:ro
+      - ./metricbeat.yml:/metricbeat/metricbeat.yml
+      
+      
+
+networks:
+    elastic:
+
+
