@@ -19,5 +19,5 @@ docker service update  --publish-add 5601:5601 elstack_kibana
 
 ## ToDo
 
-- [ ] Add persistent volumes to elasticsearch and kibana
+- [x] Add persistent volumes to elasticsearch and kibana
 - [ ] Include kibana published port on [compose file](stack.yml)

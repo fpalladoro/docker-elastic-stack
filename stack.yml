@@ -8,7 +8,9 @@ services:
     networks:
       - elastic
     environment:
-      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
 
   kibana:
     image: kibana
@@ -16,7 +18,7 @@ services:
       - elastic
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:5.2.2
+    image: docker.elastic.co/logstash/logstash:5.3.0
     ports:
       - "5043"
     networks:
@@ -37,4 +39,5 @@ services:
 networks:
     elastic:
 
-
+volumes:
+    esdata:
